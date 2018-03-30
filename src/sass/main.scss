@@ -1,0 +1,39 @@
+// $theme-colors: (
+//   "primary": #666
+// );
+
+@import "~bootstrap/scss/bootstrap.scss";
+
+// html, body, #app-main {
+//     height: 100%;
+// }
+
+// .content {
+//   margin-top: 50px;
+// }
+
+.childz {
+    //background: #ccc;    
+    border-color: lightgrey;
+    border-style: solid;
+}
+
+.child2 {
+    //background: #ccc;    
+    border-color: purple;
+    border-style: solid;
+}
+
+.kiki-sm-button {
+    height: 1.5em;
+    text-align: center;
+    padding-top: 0px;    
+}
+
+.nav-pills .nav-link.active {
+    background-color: #7f8a96;
+}
+
+.nav-link{
+    color: grey;
+}
