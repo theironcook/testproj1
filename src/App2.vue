@@ -11,6 +11,9 @@
       <p>Id: {{user.id}}</p>
     </div>
 
+    <input type="checkbox" v-model="nugget.checked">
+    <span>Am I checked? {{nugget.checked ? 'Yes' : 'No' }}</span>
+
     <div class="container-fluid">
       <div class="d-flex d-block d-sm-none">
         <a class="nav-link dropdown-toggle p-0" v-on:click="missionsDropDownClicked" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Missions</a>        
@@ -34,14 +37,11 @@
                 </span>
               </a>
             </li>
-            <li class="nav-item" v-for="link in links">              
-              <!-- <a class="nav-link" v-if="matchesFilter(link)" href="#">{{link}}</a> -->
-              <router-link class="nav-link" v-if="matchesFilter(link)" :to="{path: '/mission/' + link}">{{link}}</router-link>
+            <li class="nav-item" v-for="link in links" v-bind:key="link">
+              <router-link class="nav-link" :class="{active:selectedMissionID === link}" v-if="matchesFilter(link)" :to="{path: '/mission/' + link}">{{link}}</router-link>
             </li>
-            <li class="nav-item" v-for="i in 80">
-              <!-- <a v-if="i === 1" class="nav-link active" href="#">The Link {{i}}</a> -->
-              <!-- <a class="nav-link" v-if="matchesFilter('The Link' + i)" href="#">The Link {{i}}</a> -->
-              <router-link class="nav-link" v-if="matchesFilter('The Link' + i)" :to="{path: '/mission/' + i}">The Link-{{i}}</router-link>
+            <li class="nav-item" v-for="i in 80" v-bind:key="i">
+              <router-link class="nav-link" :class="{active:selectedMissionID === i}" v-if="matchesFilter('The Link' + i)" :to="{path: '/mission/' + i}">The Link-{{i}}</router-link>
             </li>
           </ul>
         </div>
@@ -101,6 +101,8 @@ export default class App2 extends Vue {
   id: String = '';
   idTrigger: String = '';
   user: Object = {};
+  nugget: Object = {checked: false};
+  selectedMissionID: Number = 1;
 
   mounted(){
     $(this.$refs.createMissionModal).on('shown.bs.modal', () => {   
@@ -110,13 +112,13 @@ export default class App2 extends Vue {
     });
   }
 
-  beforeUpdate(){
-    console.log('bart beforeUpdate invoked');
-  }
+  // beforeUpdate(){
+  //   console.log('bart beforeUpdate invoked');
+  // }
 
-  updated(){
-    console.log('bart updated invoked');
-  }
+  // updated(){
+  //   console.log('bart updated invoked');
+  // }
 
   missionsDropDownClicked(event: any){
     event.preventDefault();
